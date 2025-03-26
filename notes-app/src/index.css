@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container {
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding: 1rem;
+}
+
+.notes-list{
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+}
+
+.note.new{
+  background-color: #67d7cc;
+  border-radius: 20px;
+  padding: 1rem;
+  border-bottom: 5px #353434 solid;
+  min-height: 100px;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+}
+
+textarea{
+  width: 100%;
+  border: none;
+  resize: none;
+  background-color: transparent;
+  resize: none;
+  font-size: 1.5rem;
+}
+
+textarea:focus{
+  outline: none;
+}
+
+.save{
+  background-color: #353434;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save:hover{
+  font-weight: bold;
+  color: #353434;
+  background-color: #ffffff;
+}
+
+.note{
+  background-color: #fef68a;
+  border-radius: 20px;
+  padding: 1rem;
+  border-bottom: 5px #353434 solid;
+  min-height: 100px;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+}
+
+.note-footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
