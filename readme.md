@@ -1,5 +1,6 @@
 # HyperNotes 📝 [Still Work in Progress]
 
+![logo](https://github.com/user-attachments/assets/fbf9b12c-9f81-452f-9da8-b55a2b3744e1)
 
 
 ## Overview
