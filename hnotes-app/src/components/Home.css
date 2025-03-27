@@ -1,0 +1,80 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  
+  .home-content {
+    text-align: center;
+    max-width: 600px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .home-logo {
+    max-width: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .home-description {
+    margin-bottom: 30px;
+  }
+  
+  .home-description h2 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .home-description p {
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  .home-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .android-download button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .web-auth-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .login-button, 
+  .register-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-button {
+    background-color: #2196F3;
+  }
+  
+  .register-button {
+    background-color: #FF9800;
+  }
+  
+  .login-button:hover, 
+  .register-button:hover {
+    opacity: 0.8;
+  }
