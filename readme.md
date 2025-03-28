@@ -4,7 +4,7 @@
 
 
 ## Overview
-NoteSync is a modern, cross-platform note-taking application designed to help you capture, organize, and sync your thoughts seamlessly across devices.
+HyperNotes is a modern, cross-platform note-taking application designed to help you capture, organize, and sync your thoughts seamlessly across devices.
 
 ## 🚀 Features
 
