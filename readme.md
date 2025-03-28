@@ -99,9 +99,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📞 Contact
 
-Your Name - youremail@example.com
+Your Name - omeshapasan@gmail.com
 
-Project Link: [https://github.com/yourusername/notesync](https://github.com/yourusername/notesync)
+Project Link: [https://github.com/omeshapasan2/Flutter-React-Notes-App](github.com/omeshapasan2/Flutter-React-Notes-App)
 
 ## 🌟 Acknowledgements
 
