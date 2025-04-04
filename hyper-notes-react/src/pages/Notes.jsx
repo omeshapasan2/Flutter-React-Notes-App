@@ -1,12 +1,13 @@
 import NotesList from "../components/NotesList";
+import { useState } from "react";
 
 // src/pages/Notes.jsx
 const Notes = () => {
+    const [notes, setNotes] = useState([]);
+    
     return (
-      <div className="animated-background h-screen bg-gradient-to-r from-blue-500 via-blue-500 to-indigo-500 text-white">
-        <div className="">
+      <div className="notes-bg">
           <NotesList />
-        </div>
       </div>
     );
   };
