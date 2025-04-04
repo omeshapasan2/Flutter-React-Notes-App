@@ -2,6 +2,7 @@ import NotesList from "../components/NotesList";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import { toast } from 'react-toastify';
+import Search from "../components/Search";
 
 // src/pages/Notes.jsx
 const Notes = () => {
@@ -32,6 +33,8 @@ const Notes = () => {
       date: "03/04/2000"  
     },
   ]);
+
+    const [searchText, setSearchText] = useState("");
 
     const addNote = (text) => {
         const date = new Date();
@@ -78,8 +81,11 @@ const Notes = () => {
 
     return (
       <div className="notes-bg">
+          <Search handleSearchNote={setSearchText}/>
           <NotesList 
-            notes={notes} 
+            notes={notes.filter((note)=> 
+                note.text.toLowerCase().includes(searchText)
+            )} 
             handleAddNote={addNote}
             handleDeleteNote={deleteNote}
             handleCopyNote={handleCopyNote}
