@@ -9,7 +9,10 @@ const AddNote = ({ handleAddNote }) => {
     };
 
     const handleSaveClick = () => {
-        handleAddNote(noteText);
+        if(noteText.trim().length > 0){
+            handleAddNote(noteText);
+            setNoteText('');
+        }
     }
 
 
