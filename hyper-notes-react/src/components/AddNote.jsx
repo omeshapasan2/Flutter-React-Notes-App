@@ -3,6 +3,8 @@ import { useState } from "react";
 const AddNote = ({ handleAddNote }) => {
     // Function to handle the addition of a new note
     const [noteText, setNoteText] = useState('');
+    //character limit .1
+    const characterLimit = 200;
 
     const handleChange = (event) => {
         setNoteText(event.target.value);
@@ -26,7 +28,10 @@ const AddNote = ({ handleAddNote }) => {
                 onChange={handleChange}>
             </textarea>
             <div className="note-footer">
-                <small>200 Characters</small>
+                <small>
+                    {/* /* character limit .2 */}
+                    {characterLimit - noteText.length} Characters
+                </small>
                 <button className="save" onClick={handleSaveClick}>Save</button>
             </div>
         </div>

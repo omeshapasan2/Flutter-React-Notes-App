@@ -78,7 +78,7 @@ const Home = () => {
               <Link to="/" className="text-amber-50 hover:text-purple-400 transition-colors">
                 Home
               </Link>
-              <Link to="/about" className="text-amber-50 hover:text-purple-400 transition-colors">
+              <Link href="#about" className="text-amber-50 hover:text-purple-400 transition-colors">
                 About
               </Link>
               <Link to="/login" className="text-amber-50 hover:text-purple-400 transition-colors">
@@ -102,7 +102,7 @@ const Home = () => {
                   Home
                 </Link>
                 <Link 
-                  to="/about" 
+                  href="#about" 
                   className="text-amber-50 hover:text-purple-400 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
