@@ -7,31 +7,16 @@ import Search from "../components/Search";
 // src/pages/Notes.jsx
 const Notes = () => {
     const [notes, setNotes] = useState([
+
+    // Sample notes for initial state. Delete or modify as needed.
     {
       id: nanoid(),
-      text: "This is 1st note...",
+      text: "Welcome to Hyper Notes! \n       This is a sample note. \n\n✅ You can add, delete, and copy notes. \n😎Enjoy your note-taking experience!",
       date: "03/04/2000"  
     },
-    {
-      id: nanoid(),
-      text: "This is 2nd note...",
-      date: "03/04/2000"  
-    },
-    {
-      id: nanoid(),
-      text: "This is 3rd note...",
-      date: "03/04/2000"  
-    },
-    {
-      id: nanoid(),
-      text: "This is 4th note...",
-      date: "03/04/2000"  
-    },
-    {
-      id: nanoid(),
-      text: "This is 5th note...",
-      date: "03/04/2000"  
-    },
+    // ----------------------------------------------------------
+
+
   ]);
 
     const [searchText, setSearchText] = useState("");
