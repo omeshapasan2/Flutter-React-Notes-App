@@ -40,3 +40,51 @@
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
 }
+
+/* Add Note Styling */
+
+.note.new{
+    background-color: #67d7cc;
+    border-radius: 20px;
+    padding: 1rem;
+    border-bottom: 5px #353434 solid;
+    min-height: 100px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+  }
+  
+  textarea{
+    width: 100%;
+    border: none;
+    resize: none;
+    background-color: transparent;
+    resize: none;
+    font-size: 1.5rem;
+  }
+  
+  textarea:focus{
+    outline: none;
+  }
+  
+  .save {
+    position: relative;
+    background-color: #353434;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .save:hover{
+    font-weight: bold;
+    color: #353434;
+    background-color: #ffffff;
+  }
+  
+  .save:active{
+    transform: scale(0.9);
+  }
+

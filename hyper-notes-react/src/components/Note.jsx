@@ -1,11 +1,11 @@
 import { MdDeleteForever } from "react-icons/md";
 
-const Note = () => {
+const Note = ( { id, text, date } ) => {
     return(
         <div className="note">
-            <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+            <span>{text}</span>
             <div className="note-footer">
-                <small>03/04/2000</small>
+                <small>{date}</small>
                 <MdDeleteForever 
                     onClick={() => console.log("Delete Note")} 
                     className="delete-icon" 
