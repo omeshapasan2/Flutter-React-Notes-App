@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import Search from "../components/Search";
+import Header from "../components/Header";
 
 // src/pages/Notes.jsx
 const Notes = () => {
@@ -20,6 +21,9 @@ const Notes = () => {
   ]);
 
     const [searchText, setSearchText] = useState("");
+
+    // Dark mode toggle state
+    const [darkMode, setDarkMode] = useState(false);
 
     const addNote = (text) => {
         const date = new Date();
@@ -65,16 +69,19 @@ const Notes = () => {
   
 
     return (
-      <div className="notes-bg">
-          <Search handleSearchNote={setSearchText}/>
-          <NotesList 
-            notes={notes.filter((note)=> 
-                note.text.toLowerCase().includes(searchText)
-            )} 
-            handleAddNote={addNote}
-            handleDeleteNote={deleteNote}
-            handleCopyNote={handleCopyNote}
-          />
+      <div className={`${darkMode && 'dark-mode'}`}>
+        <div className="notes-bg">
+            <Header handleToggleDarkMode={setDarkMode}/>
+            <Search handleSearchNote={setSearchText}/>
+            <NotesList 
+              notes={notes.filter((note)=> 
+                  note.text.toLowerCase().includes(searchText)
+              )} 
+              handleAddNote={addNote}
+              handleDeleteNote={deleteNote}
+              handleCopyNote={handleCopyNote}
+            />
+        </div>
       </div>
     );
   };

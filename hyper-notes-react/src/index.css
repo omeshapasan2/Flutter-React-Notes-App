@@ -93,3 +93,80 @@ body{
     transform: scale(0.9);
   }
 
+  /* Note Page - Header Styling */
+
+  .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #353434;
+    color: white;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .header h1{
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  .header button{
+    background-color: transparent;
+    color: white;
+    border:#ffffff solid 1px;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  /* Dark Mode Styling */
+
+.dark-mode .notes-bg{
+  background-color: #000000;
+}
+
+.dark-mode .note.new{
+  color: #ffffff;
+  background-color: #1a1a1a;
+  border-bottom: 5px #4d4d4d solid;
+}
+
+.dark-mode .note{
+  color: #ffffff;
+  background-color: #121212;
+  border-bottom: 5px #4d4d4d solid;
+}
+
+.dark-mode textarea{
+  color: #ffffff;
+}
+
+.dark-mode .save {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.dark-mode .save:hover{
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark-mode .note-footer{
+  color: #dddddd;
+}
+
+.notes-bg, .note, .note.new, textarea, .save {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode .delete-icon{
+  color: #ffffff;
+}
+
+.dark-mode .delete-icon:hover{
+  color: #e23c3c;
+}
+ 
