@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
+body{
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .notes-bg{
+    padding-top: 2rem;
     max-width: 960px;
     margin-right: auto;
     margin-left: auto;

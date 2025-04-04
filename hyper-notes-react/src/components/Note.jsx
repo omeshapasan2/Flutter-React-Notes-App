@@ -7,16 +7,18 @@ const Note = ( { id, text, date, handleDeleteNote, handleCopyNote } ) => {
             <span>{text}</span>
             <div className="note-footer">
                 <small>{date}</small>
-                <MdDeleteForever 
-                    onClick={() => handleDeleteNote(id)} 
-                    className="delete-icon" 
-                    size="1.3em"
-                />
+                
                 <MdContentCopy 
                     onClick={() => handleCopyNote(text)} 
-                    className="copy-icon" 
+                    className="copy-icon text-blue-500 hover:text-blue-700 cursor-pointer transition duration-200" 
                     size="1.3em"
                 />
+                <MdDeleteForever 
+                    onClick={() => handleDeleteNote(id)} 
+                    className="delete-icon text-black hover:text-red-500 active:scale-90 cursor-pointer transition duration-200"
+                    size="1.3em"
+                />
+                
             </div>
         </div>
     )
