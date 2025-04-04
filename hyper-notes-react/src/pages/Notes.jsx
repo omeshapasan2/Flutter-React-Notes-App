@@ -41,11 +41,32 @@ const Notes = () => {
         };
         const newNotes = [...notes, newNote];
         setNotes(newNotes);
+    };
+
+    const deleteNote = (id) => {
+        const newNotes = notes.filter((note) => note.id !== id);
+        setNotes(newNotes);
     }
+
+    const handleCopyNote = (text) => {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                alert("Note copied to clipboard!");
+            })
+            .catch((err) => {
+                console.error("Failed to copy: ", err);
+            });
+    };
+  
 
     return (
       <div className="notes-bg">
-          <NotesList notes={notes} handleAddNote={addNote}/>
+          <NotesList 
+            notes={notes} 
+            handleAddNote={addNote}
+            handleDeleteNote={deleteNote}
+            handleCopyNote={handleCopyNote}
+          />
       </div>
     );
   };

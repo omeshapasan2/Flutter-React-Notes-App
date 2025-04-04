@@ -7,7 +7,9 @@ const AddNote = ({ handleAddNote }) => {
     const characterLimit = 200;
 
     const handleChange = (event) => {
-        setNoteText(event.target.value);
+        if(characterLimit - event.target.value.length >= 0){
+            setNoteText(event.target.value);
+        }
     };
 
     const handleSaveClick = () => {
