@@ -8,33 +8,21 @@ import { getAuth } from "firebase/auth";
 
 // src/pages/Notes.jsx
 const Notes = () => {
-  //   const [notes, setNotes] = useState([
 
-  //   // Sample notes for initial state. Delete or modify as needed.
-  //   {
-  //     id: nanoid(),
-  //     text: "Welcome to Hyper Notes! \n       This is a sample note. \n\n✅ You can add, delete, and copy notes. \n😎Enjoy your note-taking experience!",
-  //     date: "03/04/2000"  
-  //   },
-  //   // ----------------------------------------------------------
-
-
-  // ]);
-
-  const [notes, setNotes] = useState(() => {
-    const savedNotes = localStorage.getItem('react-notes-app-data');
-    if (savedNotes) {
-      return JSON.parse(savedNotes);
-    } else {
-      return [
-        {
-          id: nanoid(),
-          text: "Welcome to Hyper Notes! \n       This is a sample note. \n\n✅ You can add, delete, and copy notes. \n😎Enjoy your note-taking experience!",
-          date: "03/04/2000"
+    const [notes, setNotes] = useState(() => {
+        const savedNotes = localStorage.getItem('react-notes-app-data');
+        if (savedNotes) {
+          return JSON.parse(savedNotes);
+        } else {
+          return [
+            {
+              id: nanoid(),
+              text: "Welcome to Hyper Notes! \n       This is a sample note. \n\n✅ You can add, delete, and copy notes. \n😎Enjoy your note-taking experience!",
+              date: "03/04/2000"
+            }
+          ];
         }
-      ];
-    }
-  });
+    });
   
 
     const [searchText, setSearchText] = useState("");
@@ -42,16 +30,16 @@ const Notes = () => {
     // Dark mode toggle state
     const [darkMode, setDarkMode] = useState(false);
 
-    // // Firebase User ID  Logging
-    // const auth = getAuth();
-    // const user = auth.currentUser;
+    // Firebase User ID  Logging
+    const auth = getAuth();
+    const user = auth.currentUser;
 
-    // if (user) {
-    //     const uid = user.uid;
-    //     console.log("User ID:", user.uid);
-    // }
+    if (user) {
+        const uid = user.uid;
+        console.log("User ID:", user.uid);
+    }
 
-    // //------------------------------
+    //------------------------------
 
     // Local storage .2 - Load notes from local storage
     useEffect(() => {
