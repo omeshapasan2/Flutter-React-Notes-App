@@ -1,9 +1,10 @@
 import NotesList from "../components/NotesList";
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
 import Search from "../components/Search";
 import Header from "../components/Header";
+import { getAuth } from "firebase/auth";
 
 // src/pages/Notes.jsx
 const Notes = () => {
@@ -24,6 +25,23 @@ const Notes = () => {
 
     // Dark mode toggle state
     const [darkMode, setDarkMode] = useState(false);
+
+    // Firebase User ID 
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+        const uid = user.uid;
+        console.log("User ID:", user.uid);
+    }
+
+    // Local storage .1
+    useEffect(() => {
+        localStorage.setItem(
+            'react-notes-app-data', 
+            JSON.stringify(notes)
+        );
+    }, [notes]);
 
     const addNote = (text) => {
         const date = new Date();
