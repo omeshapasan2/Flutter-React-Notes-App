@@ -23,6 +23,7 @@ const AddNote = ({ handleAddNote }) => {
     return(
         <div className="note new">
             <textarea 
+                className="textarea"
                 rows="5" 
                 cols="10" 
                 placeholder="Type to add a note..."
@@ -30,7 +31,7 @@ const AddNote = ({ handleAddNote }) => {
                 onChange={handleChange}>
             </textarea>
             <div className="note-footer">
-                <small>
+                <small className="text-gray-500 text-md">
                     {/* /* character limit .2 */}
                     {characterLimit - noteText.length} Characters
                 </small>
