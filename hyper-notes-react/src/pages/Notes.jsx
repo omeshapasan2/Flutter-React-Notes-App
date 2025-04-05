@@ -8,40 +8,70 @@ import { getAuth } from "firebase/auth";
 
 // src/pages/Notes.jsx
 const Notes = () => {
-    const [notes, setNotes] = useState([
+  //   const [notes, setNotes] = useState([
 
-    // Sample notes for initial state. Delete or modify as needed.
-    {
-      id: nanoid(),
-      text: "Welcome to Hyper Notes! \n       This is a sample note. \n\n✅ You can add, delete, and copy notes. \n😎Enjoy your note-taking experience!",
-      date: "03/04/2000"  
-    },
-    // ----------------------------------------------------------
+  //   // Sample notes for initial state. Delete or modify as needed.
+  //   {
+  //     id: nanoid(),
+  //     text: "Welcome to Hyper Notes! \n       This is a sample note. \n\n✅ You can add, delete, and copy notes. \n😎Enjoy your note-taking experience!",
+  //     date: "03/04/2000"  
+  //   },
+  //   // ----------------------------------------------------------
 
 
-  ]);
+  // ]);
+
+  const [notes, setNotes] = useState(() => {
+    const savedNotes = localStorage.getItem('react-notes-app-data');
+    if (savedNotes) {
+      return JSON.parse(savedNotes);
+    } else {
+      return [
+        {
+          id: nanoid(),
+          text: "Welcome to Hyper Notes! \n       This is a sample note. \n\n✅ You can add, delete, and copy notes. \n😎Enjoy your note-taking experience!",
+          date: "03/04/2000"
+        }
+      ];
+    }
+  });
+  
 
     const [searchText, setSearchText] = useState("");
 
     // Dark mode toggle state
     const [darkMode, setDarkMode] = useState(false);
 
-    // Firebase User ID 
-    const auth = getAuth();
-    const user = auth.currentUser;
+    // // Firebase User ID  Logging
+    // const auth = getAuth();
+    // const user = auth.currentUser;
 
-    if (user) {
-        const uid = user.uid;
-        console.log("User ID:", user.uid);
-    }
+    // if (user) {
+    //     const uid = user.uid;
+    //     console.log("User ID:", user.uid);
+    // }
 
-    // Local storage .1
+    // //------------------------------
+
+    // Local storage .2 - Load notes from local storage
+    useEffect(() => {
+      const savedNotes = JSON.parse(
+          localStorage.getItem('react-notes-app-data')
+      );
+      if (savedNotes) {
+          setNotes(savedNotes);
+      }
+  }, []);
+
+    // Local storage .1 - Save notes to local storage
     useEffect(() => {
         localStorage.setItem(
             'react-notes-app-data', 
             JSON.stringify(notes)
         );
     }, [notes]);
+
+    
 
     const addNote = (text) => {
         const date = new Date();
