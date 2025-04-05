@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
 import { useNavigate, Link } from "react-router-dom";
+import { LoadingContext } from "../App";
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isAuthenticating, setIsAuthenticating] = useState(false); // Track authentication process
+    const { setLoading } = useContext(LoadingContext); // Access loading context
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -14,11 +18,16 @@ const Login = () => {
         setError('');
 
         try {
+            // Start loading state
+            setIsAuthenticating(true);
+
             await signInWithEmailAndPassword(auth, email, password);
             navigate('/notes');
         } catch (error) {
             setError('Failed to log in. Please check your credentials.');
             console.error(error);
+            setIsAuthenticating(false);
+            toast.error(error.message);
         }
     };
 
