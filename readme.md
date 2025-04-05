@@ -1,10 +1,13 @@
-# HyperNotes 📝 [Still Work in Progress]
+# HyperNotes 📝
 
 ![logo](https://github.com/user-attachments/assets/fbf9b12c-9f81-452f-9da8-b55a2b3744e1)
 
+## 🌐 Demo
+
+Visit our live demo site: [https://notes.omeshapasan.site](https://notes.omeshapasan.site)
 
 ## Overview
-NoteSync is a modern, cross-platform note-taking application designed to help you capture, organize, and sync your thoughts seamlessly across devices.
+HyperNotes is a modern, cross-platform note-taking application designed to help you capture, organize, and sync your thoughts seamlessly across devices.
 
 ## 🚀 Features
 
@@ -26,14 +29,13 @@ NoteSync is a modern, cross-platform note-taking application designed to help yo
 ## 📦 Installation
 
 ### Prerequisites
-<!-- - Node.js (v14 or later) -->
 - npm or Yarn
 - Firebase Account
 
 ### Clone the Repository
 ```bash
 git clone https://github.com/omeshapasan2/Flutter-React-Notes-App.git
-cd hyper-notes
+cd hyper-notes-react
 ```
 
 ### Install Dependencies
@@ -85,6 +87,8 @@ npm start
 yarn start
 ```
 
+
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -99,9 +103,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📞 Contact
 
-Your Name - youremail@example.com
+Omesha Pasan - youremail@example.com
 
-Project Link: [https://github.com/yourusername/notesync](https://github.com/yourusername/notesync)
+Project Link: [https://github.com/omeshapasan2/Flutter-React-Notes-App](https://github.com/omeshapasan2/Flutter-React-Notes-App)
 
 ## 🌟 Acknowledgements
 
