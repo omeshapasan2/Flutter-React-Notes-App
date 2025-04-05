@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import Search from "../components/Search";
 import Header from "../components/Header";
 import { getAuth } from "firebase/auth";
+import { db } from "../config/firebase"; // adjust the path to your firebase.js
+import { collection, addDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 
 // src/pages/Notes.jsx
 const Notes = () => {
@@ -30,28 +32,48 @@ const Notes = () => {
     // Dark mode toggle state
     const [darkMode, setDarkMode] = useState(false);
 
-    // Firebase User ID  Logging
-    const auth = getAuth();
-    const user = auth.currentUser;
+    // // Firebase User ID  Logging
+    // const auth = getAuth();
+    // const user = auth.currentUser;
 
-    if (user) {
-        const uid = user.uid;
-        console.log("User ID:", user.uid);
-    }
+    // if (user) {
+    //     const uid = user.uid;
+    //     console.log("User ID:", user.uid);
+    // }
 
-    //------------------------------
+    // //------------------------------
 
-    // Local storage .2 - Load notes from local storage
+    // Firestore - Load notes from Firestore
     useEffect(() => {
-      const savedNotes = JSON.parse(
-          localStorage.getItem('react-notes-app-data')
-      );
-      if (savedNotes) {
-          setNotes(savedNotes);
-      }
-  }, []);
+      const auth = getAuth();
+    
+      const unsubscribeAuth = auth.onAuthStateChanged((user) => {
+        if (user) {
+          const notesRef = collection(db, "users", user.uid, "notes");
+    
+          const unsubscribeNotes = onSnapshot(notesRef, (snapshot) => {
+            const userNotes = snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data()
+            }));
+            setNotes(userNotes);
+          });
+    
+          // Clean up both listeners
+          return () => {
+            unsubscribeNotes();
+            unsubscribeAuth();
+          };
+        }
+      });
+    
+      // Clean up auth listener if component unmounts early
+      return () => unsubscribeAuth();
+    }, []);
+    
+    
 
-    // Local storage .1 - Save notes to local storage
+    // Firestore - Save notes to Firestore
     useEffect(() => {
         localStorage.setItem(
             'react-notes-app-data', 
@@ -61,29 +83,37 @@ const Notes = () => {
 
     
 
-    const addNote = (text) => {
-        const date = new Date();
-        const newNote = {
-            id: nanoid(),
-            text: text,
-            date: date.toLocaleDateString()
-        };
-        const newNotes = [...notes, newNote];
-        setNotes(newNotes);
+    const addNote = async (text) => {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        const date = new Date().toLocaleDateString();
+      
+        if (user) {
+          await addDoc(collection(db, "users", user.uid, "notes"), {
+            text,
+            date
+          });
+        }
     };
-
-    const deleteNote = (id) => {
-        const newNotes = notes.filter((note) => note.id !== id);
-        setNotes(newNotes);
     
+
+    const deleteNote = async (id) => {
+        const auth = getAuth();
+        const user = auth.currentUser;
+      
+        if (user) {
+          await deleteDoc(doc(db, "users", user.uid, "notes", id));
+        }
+      
         toast.error("Note deleted", {
-            position: "bottom-right",
-            autoClose: 2000,
-            hideProgressBar: true,
-            pauseOnHover: false,
-            closeOnClick: true
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          pauseOnHover: false,
+          closeOnClick: true
         });
     };
+    
   
 
     const handleCopyNote = (text) => {
