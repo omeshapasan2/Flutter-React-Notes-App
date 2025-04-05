@@ -1,5 +1,5 @@
-import 'package:app_v1/auth/button.dart';
-import 'package:app_v1/auth/text_field.dart';
+import 'button.dart';
+import 'text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login.dart';
