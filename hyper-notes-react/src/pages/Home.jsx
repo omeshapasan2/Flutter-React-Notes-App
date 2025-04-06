@@ -16,6 +16,7 @@ import {
   FaTimes
 } from 'react-icons/fa';
 import { SiFlutter, SiFirebase } from 'react-icons/si';
+import { Download } from "lucide-react";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -216,10 +217,11 @@ const Home = () => {
                 className="transform transition-transform hover:-translate-y-1"
               >
                 <button className="flex items-center gap-2 border-2 border-purple-600 
-                                   text-purple-600 px-8 py-3 rounded-md font-semibold 
-                                   hover:bg-purple-600 hover:text-amber-50 
-                                   focus:outline-none focus:ring-2 focus:ring-purple-500">
-                  View on GitHub
+                                  text-purple-600 px-8 py-3 rounded-md font-semibold 
+                                  hover:bg-purple-600 hover:text-amber-50 
+                                  focus:outline-none focus:ring-2 focus:ring-purple-500">
+                  <Download className="w-5 h-5" />
+                  Download Android App
                 </button>
               </a>
             </div>
