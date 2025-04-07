@@ -20,7 +20,7 @@ import { Download } from "lucide-react";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(false);
   
   // Splash screen effect
   useEffect(() => {
