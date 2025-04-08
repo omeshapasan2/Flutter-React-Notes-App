@@ -211,7 +211,7 @@ const Home = () => {
               </Link>
               
               <a 
-                href="https://github.com/omeshapasan2/Flutter-React-Notes-App" 
+                href="/downloads/hyper-notes.apk" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="transform transition-transform hover:-translate-y-1"
