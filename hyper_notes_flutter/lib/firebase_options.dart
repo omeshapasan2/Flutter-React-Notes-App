@@ -42,17 +42,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyChGYvlkeVmbRJ8EkVJGY4pDK5jN404KIU',
-    appId: '1:84731507514:web:eb7e5742f8d3af98779603',
+    appId: '1:84731507514:web:71b0019e10a905cd779603',
     messagingSenderId: '84731507514',
     projectId: 'hypernotes-b42d0',
     authDomain: 'hypernotes-b42d0.firebaseapp.com',
     storageBucket: 'hypernotes-b42d0.firebasestorage.app',
-    measurementId: 'G-2C2TY9X9VD',
+    measurementId: 'G-1VEHFXW6M4',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAoS6SWy8wHeEkmxnbji5c8xPyXOWI_SZA',
-    appId: '1:84731507514:android:1710919d4b3e1dc2779603',
+    appId: '1:84731507514:android:0676d4c672dd3ad2779603',
     messagingSenderId: '84731507514',
     projectId: 'hypernotes-b42d0',
     storageBucket: 'hypernotes-b42d0.firebasestorage.app',
@@ -60,31 +60,31 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCOXVgdNYrKIBc7QJ1FqsXa3onPeNndLFA',
-    appId: '1:84731507514:ios:768a156add473db0779603',
+    appId: '1:84731507514:ios:85a78e3bc0f95e5e779603',
     messagingSenderId: '84731507514',
     projectId: 'hypernotes-b42d0',
     storageBucket: 'hypernotes-b42d0.firebasestorage.app',
-    iosClientId: '84731507514-pn9qfs4jieofvd66guf7vt6vbkuqagsh.apps.googleusercontent.com',
-    iosBundleId: 'com.example.appV1',
+    iosClientId: '84731507514-c6rmt6nofv8rpmlp73mr3ltii8unnuru.apps.googleusercontent.com',
+    iosBundleId: 'com.example.hyperNotesFlutter',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCOXVgdNYrKIBc7QJ1FqsXa3onPeNndLFA',
-    appId: '1:84731507514:ios:768a156add473db0779603',
+    appId: '1:84731507514:ios:85a78e3bc0f95e5e779603',
     messagingSenderId: '84731507514',
     projectId: 'hypernotes-b42d0',
     storageBucket: 'hypernotes-b42d0.firebasestorage.app',
-    iosClientId: '84731507514-pn9qfs4jieofvd66guf7vt6vbkuqagsh.apps.googleusercontent.com',
-    iosBundleId: 'com.example.appV1',
+    iosClientId: '84731507514-c6rmt6nofv8rpmlp73mr3ltii8unnuru.apps.googleusercontent.com',
+    iosBundleId: 'com.example.hyperNotesFlutter',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyChGYvlkeVmbRJ8EkVJGY4pDK5jN404KIU',
-    appId: '1:84731507514:web:ff95f939a2abdf71779603',
+    appId: '1:84731507514:web:b0bd9daa8fc7da7f779603',
     messagingSenderId: '84731507514',
     projectId: 'hypernotes-b42d0',
     authDomain: 'hypernotes-b42d0.firebaseapp.com',
     storageBucket: 'hypernotes-b42d0.firebasestorage.app',
-    measurementId: 'G-11Z3092DN7',
+    measurementId: 'G-2Q7Y6KHPCX',
   );
 }

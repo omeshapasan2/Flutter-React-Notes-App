@@ -1,45 +1,62 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hyper_notes_flutter/core/constants.dart';
-import 'package:hyper_notes_flutter/pages/main_page.dart';
-import 'package:hyper_notes_flutter/auth/login.dart';
-import 'package:hyper_notes_flutter/auth/login_false-page.dart';
-import 'package:hyper_notes_flutter/auth/register.dart';
-import 'package:hyper_notes_flutter/auth/auth.dart';
-import 'package:hyper_notes_flutter/pages/profile.dart' as profile;
+import 'firebase_options.dart';
+import 'screens/get_started_screen.dart';
+import 'routes.dart';
+import 'services/auth_service.dart';
+import 'screens/home_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'HyperNotes',
+      debugShowCheckedModeBanner: false,
+      title: 'Firebase Auth Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        fontFamily: 'Poppins',
-        scaffoldBackgroundColor: const Color.fromARGB(255, 200, 197, 200),
-        appBarTheme: Theme.of(context).appBarTheme.copyWith(
-              backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-              titleTextStyle: TextStyle(
-                  color: Color(0xFF9B4DCC),
-                  fontSize: 32,
-                  fontFamily: 'Courier',
-                  fontWeight: FontWeight.bold),
-            ),
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MainPage(),
-      routes: {
-        '/home': (context) => MainPage(),
-        '/profile': (context) => profile.UserProfilePage(),
-        '/lfp': (context) => LoginFalsePage(),
-        '/login': (context) => LoginPage(),
-        '/register': (context) => RegisterPage(),
-        '/auth': (context) => AuthPage(),
+      // Use home for the AuthWrapper
+      home: AuthWrapper(),
+      // Use routes for named navigation to other screens
+      routes: AppRoutes.routes,
+    );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  final AuthService _authService = AuthService();
+  
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<dynamic>(
+      stream: _authService.authStateChanges,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          final user = snapshot.data;
+          if (user == null) {
+            // User is not logged in
+            return OnboardingScreen();
+          }
+          // User is logged in
+          return HomeScreen();
+        }
+        
+        // Checking authentication state
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
       },
     );
   }
