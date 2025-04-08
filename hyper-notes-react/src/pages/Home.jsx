@@ -20,23 +20,23 @@ import { Download } from "lucide-react";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showSplash, setShowSplash] = useState(false);
+  const [showSplash, setShowSplash] = useState(true); // Set to true initially
   const [latestRelease, setLatestRelease] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // Fetch latest release from GitHub API
   useEffect(() => {
-      fetch('https://api.github.com/repos/omeshapasan2/Flutter-React-Notes-App/releases/latest')
-        .then(response => response.json())
-        .then(data => {
-          setLatestRelease(data);
-          setLoading(false);
-        })
-        .catch(error => {
-          console.error('Error fetching latest release:', error);
-          setLoading(false);
-        });
-    }, []);
+    fetch('https://api.github.com/repos/omeshapasan2/Flutter-React-Notes-App/releases/latest')
+      .then(response => response.json())
+      .then(data => {
+        setLatestRelease(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching latest release:', error);
+        setLoading(false);
+      });
+  }, []);
   
   // Splash screen effect
   useEffect(() => {
@@ -95,9 +95,9 @@ const Home = () => {
               <Link to="/" className="text-amber-50 hover:text-purple-400 transition-colors">
                 Home
               </Link>
-              <Link href="#about" className="text-amber-50 hover:text-purple-400 transition-colors">
+              <a href="#about" className="text-amber-50 hover:text-purple-400 transition-colors">
                 About
-              </Link>
+              </a>
               <Link to="/login" className="text-amber-50 hover:text-purple-400 transition-colors">
                 Login
               </Link>
@@ -118,13 +118,13 @@ const Home = () => {
                 >
                   Home
                 </Link>
-                <Link 
+                <a 
                   href="#about" 
                   className="text-amber-50 hover:text-purple-400 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   About
-                </Link>
+                </a>
                 <Link 
                   to="/login" 
                   className="text-amber-50 hover:text-purple-400 transition-colors"
@@ -205,7 +205,7 @@ const Home = () => {
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="text-left animate-fadeIn">
+          <div className="text-left">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
               HyperNotes: Your Intelligent
               <br />
@@ -226,25 +226,34 @@ const Home = () => {
                 </button>
               </Link>
               
-              <a 
-                href={latestRelease.assets[0]?.browser_download_url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="transform transition-transform hover:-translate-y-1"
-              >
-                <button className="flex items-center gap-2 border-2 border-purple-600 
+              {!loading && latestRelease && latestRelease.assets && latestRelease.assets[0] && (
+                <a 
+                  href={latestRelease.assets[0].browser_download_url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="transform transition-transform hover:-translate-y-1"
+                >
+                  <button className="flex items-center gap-2 border-2 border-purple-600 
                                   text-purple-600 px-8 py-3 rounded-md font-semibold 
                                   hover:bg-purple-600 hover:text-amber-50 
                                   focus:outline-none focus:ring-2 focus:ring-purple-500">
-                  <Download className="w-5 h-5" />
-                  Download Android App ({latestRelease.tag_name})
-                </button>
-              </a>
+                    <Download className="w-5 h-5" />
+                    Download Android App {latestRelease.tag_name && `(${latestRelease.tag_name})`}
+                  </button>
+                </a>
+              )}
+              
+              {loading && (
+                <div className="flex items-center gap-2 border-2 border-purple-600 
+                              text-purple-600 px-8 py-3 rounded-md font-semibold">
+                  <span>Loading app version...</span>
+                </div>
+              )}
             </div>
           </div>
 
           <div className="flex justify-center md:justify-end">
-            <div className="w-full max-w-md animate-slideIn">
+            <div className="w-full max-w-md">
               <img
                 src={mainImage}
                 alt="NoteSync App"
@@ -267,8 +276,7 @@ const Home = () => {
                 key={index} 
                 className="bg-zinc-800 p-6 rounded-lg text-center 
                            transform transition-transform hover:-translate-y-2 
-                           hover:shadow-lg animate-fadeIn"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                           hover:shadow-lg"
               >
                 <div className="flex justify-center mb-4">
                   {feature.icon}
@@ -307,26 +315,28 @@ const Home = () => {
         <AboutSection />
       </div>
       
-      {/* CSS for Animations */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        @keyframes slideIn {
-          from { transform: translateX(50px); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .animate-fadeIn {
-          animation: fadeIn 1s ease-out forwards;
-        }
-        
-        .animate-slideIn {
-          animation: slideIn 1s ease-out forwards;
-        }
-      `}</style>
+      {/* Add animations using Tailwind classes instead of inline styles */}
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          
+          @keyframes slideIn {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+          }
+          
+          .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+          }
+          
+          .animate-slideIn {
+            animation: slideIn 1s ease-out forwards;
+          }
+        `}
+      </style>
     </div>
   );
 };
