@@ -6,6 +6,7 @@ import '../models/note.dart';
 import '../widgets/note_grid.dart';
 import '../widgets/note_input.dart';
 import '../widgets/search_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,6 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Define theme colors
   late ThemeData _theme;
+
+  // Define a variable to track if the menu is open
+  bool _isMenuOpen = false;
 
   @override
   void initState() {
@@ -87,18 +91,68 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
             ),
-            IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: () async {
-                await _authService.signOut();
-                if (context.mounted) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()),
-                  );
-                }
-              },
-            ),
+            
+
+          // Replace 
+          PopupMenuButton(
+            icon: Icon(_isMenuOpen ? Icons.blur_circular_rounded : Icons.blur_on_rounded),
+            onOpened: () {
+              setState(() {
+                _isMenuOpen = true;
+              });
+            },
+            onCanceled: () {
+              setState(() {
+                _isMenuOpen = false;
+              });
+            },
+            itemBuilder: (BuildContext context) {
+              // Reset icon state when menu closes after selection
+              Future.delayed(Duration.zero, () {
+                setState(() {
+                  _isMenuOpen = false;
+                });
+              });
+              
+              return [
+                PopupMenuItem(
+                  child: Row(
+                    children: [
+                      Icon(Icons.language),
+                      SizedBox(width: 8),
+                      Text('Go to Web App'),
+                    ],
+                  ),
+                  onTap: () async {
+                    // Using launchUrl from url_launcher package
+                    final Uri url = Uri.parse('https://notes.omeshapasan.site');
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                  },
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    children: [
+                      Icon(Icons.logout),
+                      SizedBox(width: 8),
+                      Text('Logout'),
+                    ],
+                  ),
+                  onTap: () async {
+                    // Add a slight delay to allow menu to close before navigation
+                    await Future.delayed(const Duration(milliseconds: 100));
+                    await _authService.signOut();
+                    if (context.mounted) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
+                    }
+                  },
+                ),
+              ];
+            },
+          ),
+
           ],
           toolbarHeight: 70,  // Increases the height of the AppBar
         ),

@@ -33,7 +33,6 @@ const Login = () => {
 
     return (
         <div className="min-h-screen bg-gray-900 relative">
-            {/* Back button positioned in top left corner outside the container */}
             <div className="absolute top-4 left-4">
                 <Link 
                     to="/" 
