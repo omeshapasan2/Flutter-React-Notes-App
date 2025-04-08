@@ -1,9 +1,9 @@
-name: Build Flutter APK
+name: Build and Release Flutter APK
 
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0'
+          flutter-version: '3.10.0'
           channel: 'stable'
       
       - name: Install dependencies
@@ -32,15 +32,18 @@ jobs:
         run: flutter build apk --release
         working-directory: ./hyper_notes_flutter
       
-      - name: Copy APK to React public folder
-        run: |
-          mkdir -p ./hyper-notes-react/public/downloads
-          cp hyper_notes_flutter/build/app/outputs/flutter-apk/app-release.apk ./hyper-notes-react/public/downloads/hyper-notes.apk
+      - name: Generate version
+        id: version
+        run: echo "VERSION=$(date +'%Y.%m.%d')-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       
-      - name: Commit and push the APK
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add ./hyper-notes-react/public/downloads/hyper-notes.apk
-          git commit -m "Update APK" || echo "No changes to commit"
-          git push
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: Release v${{ env.VERSION }}
+          draft: false
+          prerelease: false
+          files: ./hyper_notes_flutter/build/app/outputs/flutter-apk/app-release.apk
