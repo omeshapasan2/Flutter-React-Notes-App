@@ -1,0 +1,46 @@
+name: Build Flutter APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0'
+          channel: 'stable'
+      
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: ./hyper_notes_flutter
+      
+      - name: Build APK
+        run: flutter build apk --release
+        working-directory: ./hyper_notes_flutter
+      
+      - name: Copy APK to React public folder
+        run: |
+          mkdir -p ./hyper-notes-react/public/downloads
+          cp hyper_notes_flutter/build/app/outputs/flutter-apk/app-release.apk ./hyper-notes-react/public/downloads/hyper-notes.apk
+      
+      - name: Commit and push the APK
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add ./hyper-notes-react/public/downloads/hyper-notes.apk
+          git commit -m "Update APK" || echo "No changes to commit"
+          git push
