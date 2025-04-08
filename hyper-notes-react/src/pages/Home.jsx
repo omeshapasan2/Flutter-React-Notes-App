@@ -20,7 +20,7 @@ import { Download } from "lucide-react";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showSplash, setShowSplash] = useState(true); // Set to true initially
+  const [showSplash, setShowSplash] = useState(false); 
   const [latestRelease, setLatestRelease] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -49,12 +49,12 @@ const Home = () => {
   
   const features = [
     { icon: <FaCloud className="text-3xl text-purple-500" />, title: "Sync Across Devices", description: "Seamless sync between mobile and web versions" },
-    { icon: <FaFolder className="text-3xl text-purple-500" />, title: "Folder Notes", description: "Organize notes with custom labels" },
-    { icon: <FaImage className="text-3xl text-purple-500" />, title: "Picture Support", description: "Embed and attach images to your notes" },
+    { icon: <FaFolder className="text-3xl text-purple-500" />, title: "Folder Notes", description: "Organize notes with custom labels - Coming soon..." },
+    { icon: <FaImage className="text-3xl text-purple-500" />, title: "Picture Support", description: ("Embed and attach images to your notes - Coming soon...") },
     { icon: <FaSearch className="text-3xl text-purple-500" />, title: "Advanced Search", description: "Quickly find notes with powerful search" },
-    { icon: <FaLink className="text-3xl text-purple-500" />, title: "Link Support", description: "Add and track links within your notes" },
-    { icon: <FaCheckSquare className="text-3xl text-purple-500" />, title: "To-Do Lists", description: "Create and manage task lists" },
-    { icon: <FaShareAlt className="text-3xl text-purple-500" />, title: "Note Sharing", description: "Export notes as .txt or .pdf" }
+    { icon: <FaLink className="text-3xl text-purple-500" />, title: "Link Support", description: "Add and track links within your notes - Coming soon..." },
+    { icon: <FaCheckSquare className="text-3xl text-purple-500" />, title: "To-Do Lists", description: "Create and manage task lists - Coming soon..." },
+    { icon: <FaShareAlt className="text-3xl text-purple-500" />, title: "Note Sharing", description: "Export notes as .txt or .pdf - Coming soon..." }
   ];
 
   // Splash Screen Component
