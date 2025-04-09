@@ -93,64 +93,66 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             
 
-          // Replace 
-          PopupMenuButton(
-            icon: Icon(_isMenuOpen ? Icons.blur_circular_rounded : Icons.blur_on_rounded),
-            onOpened: () {
-              setState(() {
-                _isMenuOpen = true;
-              });
-            },
-            onCanceled: () {
-              setState(() {
-                _isMenuOpen = false;
-              });
-            },
-            itemBuilder: (BuildContext context) {
-              // Reset icon state when menu closes after selection
-              Future.delayed(Duration.zero, () {
-                setState(() {
-                  _isMenuOpen = false;
-                });
-              });
+          // Drop Down Menu which contains Logout and Go to Web App options 
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: PopupMenuButton(
+              // Position the menu below the icon
+              offset: const Offset(0, 40),
               
-              return [
-                PopupMenuItem(
-                  child: Row(
-                    children: [
-                      Icon(Icons.language),
-                      SizedBox(width: 8),
-                      Text('Go to Web App'),
-                    ],
+              // Use a fixed icon - let's avoid changing it to prevent flicker
+              icon: const Icon(Icons.blur_on_rounded),
+              
+              // Remove the state-changing callbacks
+              // onOpened and onCanceled can cause race conditions with Flutter's internal menu handling
+              
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem(
+                    child: Row(
+                      children: const [
+                        Icon(Icons.language),
+                        SizedBox(width: 8),
+                        Text('Go to Web App'),
+                      ],
+                    ),
+                    onTap: () async {
+                      // Add delay to ensure menu closes properly
+                      await Future.delayed(const Duration(milliseconds: 200));
+                      
+                      // Using launchUrl from url_launcher package
+                      final Uri url = Uri.parse('https://notes.omeshapasan.site');
+                      if (context.mounted) {
+                        await launchUrl(url, mode: LaunchMode.externalApplication);
+                      }
+                    },
                   ),
-                  onTap: () async {
-                    // Using launchUrl from url_launcher package
-                    final Uri url = Uri.parse('https://notes.omeshapasan.site');
-                    await launchUrl(url, mode: LaunchMode.externalApplication);
-                  },
-                ),
-                PopupMenuItem(
-                  child: Row(
-                    children: [
-                      Icon(Icons.logout),
-                      SizedBox(width: 8),
-                      Text('Logout'),
-                    ],
+                  PopupMenuItem(
+                    child: Row(
+                      children: const [
+                        Icon(Icons.logout),
+                        SizedBox(width: 8),
+                        Text('Logout'),
+                      ],
+                    ),
+                    onTap: () async {
+                      // Add delay to ensure menu closes properly
+                      await Future.delayed(const Duration(milliseconds: 200));
+                      
+                      if (context.mounted) {
+                        await _authService.signOut();
+                        if (context.mounted) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginScreen()),
+                          );
+                        }
+                      }
+                    },
                   ),
-                  onTap: () async {
-                    // Add a slight delay to allow menu to close before navigation
-                    await Future.delayed(const Duration(milliseconds: 100));
-                    await _authService.signOut();
-                    if (context.mounted) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      );
-                    }
-                  },
-                ),
-              ];
-            },
+                ];
+              },
+            ),
           ),
 
           ],
