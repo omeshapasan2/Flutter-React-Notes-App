@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import { getAuth } from "firebase/auth";
 import { db } from "../config/firebase"; // adjust the path to your firebase.js
 import { collection, addDoc, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import EditNote from "../components/EditNote";
 
 // src/pages/Notes.jsx
 const Notes = () => {
@@ -32,16 +33,10 @@ const Notes = () => {
     // Dark mode toggle state
     const [darkMode, setDarkMode] = useState(false);
 
-    // // Firebase User ID  Logging
-    // const auth = getAuth();
-    // const user = auth.currentUser;
-
-    // if (user) {
-    //     const uid = user.uid;
-    //     console.log("User ID:", user.uid);
-    // }
-
-    // //------------------------------
+    // Edit note state
+    const [editNoteId, setEditNoteId] = useState(null);
+    const [editNoteText, setEditNoteText] = useState('');
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     // Firestore - Load notes from Firestore
     useEffect(() => {
@@ -152,6 +147,17 @@ const Notes = () => {
                 console.error("Failed to copy: ", err);
             });
     };
+
+    const handleEditNote = (id, text) => {
+        setEditNoteId(id);
+        setEditNoteText(text);
+        setIsEditModalOpen(true);
+    };
+
+    const handleSaveEdit = (id, newText) => {
+        updateNote(id, newText);
+        setIsEditModalOpen(false);
+    };
   
 
     return (
@@ -166,6 +172,14 @@ const Notes = () => {
               handleAddNote={addNote}
               handleDeleteNote={deleteNote}
               handleCopyNote={handleCopyNote}
+              handleEditNote={handleEditNote}
+            />
+            <EditNote
+                isOpen={isEditModalOpen}
+                onClose={() => setIsEditModalOpen(false)}
+                onSave={handleSaveEdit}
+                noteId={editNoteId}
+                initialText={editNoteText}
             />
         </div>
       </div>
