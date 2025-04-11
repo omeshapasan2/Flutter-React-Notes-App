@@ -103,7 +103,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📞 Contact
 
-Omesha Pasan - youremail@example.com
+Omesha Pasan - omeshapasan@gmail.com
 
 Project Link: [https://github.com/omeshapasan2/Flutter-React-Notes-App](https://github.com/omeshapasan2/Flutter-React-Notes-App)
 
