@@ -11,6 +11,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Navigate } from "react-router-dom";
 import { useState, useEffect, createContext } from "react";
 import { FaLightbulb } from "react-icons/fa";
+import EditNote from "./components/EditNote";
 
 // Create a context to share loading state across components
 export const LoadingContext = createContext();
@@ -20,6 +21,8 @@ function App() {
   const [loading, setLoading] = useState(true); // Track loading state
   const [showSplash, setShowSplash] = useState(true); // Control splash screen visibility
   const [isAuthenticating, setIsAuthenticating] = useState(false); // Track authentication process
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Track edit modal state
+  const [selectedNote, setSelectedNote] = useState(null); // Store selected note for editing
 
   useEffect(() => {
     const auth = getAuth();
@@ -84,6 +87,16 @@ function App() {
   };
 
   return (
+    <>
+    {isEditModalOpen && selectedNote && (
+      <EditNote
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        onSave={handleSaveNote}
+        noteId={selectedNote.id}
+        initialText={selectedNote.text}
+      />
+    )}
     <LoadingContext.Provider value={loadingContextValue}>
       <Router>
         <ToastContainer />
@@ -103,6 +116,7 @@ function App() {
         </Routes>
       </Router>
     </LoadingContext.Provider>
+    </>
   );
 }
 

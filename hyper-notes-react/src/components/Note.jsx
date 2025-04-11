@@ -1,10 +1,14 @@
 import { MdDeleteForever } from "react-icons/md";
 import { MdContentCopy } from "react-icons/md";
+  
 
-const Note = ( { id, text, date, handleDeleteNote, handleCopyNote } ) => {
+const Note = ( { id, text, date, handleDeleteNote, handleCopyNote, handleEditNote } ) => {
     return(
-        <div className="note">
-            <span>{text}</span>
+        <div className="note" >
+            <div className="cursor-pointer" onClick ={() => handleEditNote(id, text)} >
+                <span>{text}</span>
+            </div>
+
             <div className="note-footer">
                 <small>{date}</small>
                 

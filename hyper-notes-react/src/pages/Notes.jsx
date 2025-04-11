@@ -6,7 +6,7 @@ import Search from "../components/Search";
 import Header from "../components/Header";
 import { getAuth } from "firebase/auth";
 import { db } from "../config/firebase"; // adjust the path to your firebase.js
-import { collection, addDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 
 // src/pages/Notes.jsx
 const Notes = () => {
@@ -95,6 +95,26 @@ const Notes = () => {
           });
         }
     };
+
+    const updateNote = async (id, newText) => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (user){
+        await updateDoc(doc(db,"users",user.uid,"notes",id),{
+          text: newText,
+          date: new Date().toLocaleDateString()
+        });
+
+        toast.success("Note updated", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          pauseOnHover: false,
+          closeOnClick: true
+        });
+      }
+    }
     
 
     const deleteNote = async (id) => {

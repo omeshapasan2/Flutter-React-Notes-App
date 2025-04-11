@@ -317,6 +317,7 @@ const Home = () => {
                       Create Account
                     </button>
                   </Link>
+                  OR
                   
                   {!loading && latestRelease && latestRelease.assets && latestRelease.assets[0] && (
                     <a 
