@@ -14,19 +14,78 @@ body{
   background-color: #ffffff;
 }
 
-.note{
-    background-color: #fef68a;
-    color: black;
-    overflow: auto;
-    border-radius: 20px;
-    padding: 1rem;
-    border-bottom: 5px #353434 solid;
-    min-height: 100px;
-    display: flex;
-    flex-direction:column;
-    justify-content: space-between;
-    white-space: pre-wrap;
-  }
+.note {
+  background-color: #fef68a;
+  color: black;
+  border-radius: 20px;
+  padding: 1rem;
+  border-bottom: 5px #353434 solid;
+  min-height: 100px;
+  max-height: 300px; /* Add maximum height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  white-space: pre-wrap;
+}
+
+/* Add a container for the note content */
+.note-content {
+  flex: 1;
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-bottom: 10px;
+}
+
+textarea {
+  color: #000;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  font-size: 1.5rem;
+  max-height: 200px; /* Limit height of textarea */
+  overflow-y: auto; /* Enable scrolling in textarea */
+}
+
+/* Custom scrollbar styling */
+.note-content::-webkit-scrollbar,
+textarea::-webkit-scrollbar {
+  width: 8px;               /* width of the entire scrollbar */
+}
+
+.note-content::-webkit-scrollbar-track,
+textarea::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);    /* color of the tracking area */
+  border-radius: 10px;
+}
+
+.note-content::-webkit-scrollbar-thumb,
+textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);    /* color of the scroll thumb */
+  border-radius: 10px;       /* roundness of the scroll thumb */
+}
+
+/* For Firefox */
+.note-content,
+textarea {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode scrollbar adjustments */
+.dark-mode .note-content::-webkit-scrollbar-track,
+.dark-mode textarea::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .note-content::-webkit-scrollbar-thumb,
+.dark-mode textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .note-content,
+.dark-mode textarea {
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+}
   
 .note-footer{
     display: flex;

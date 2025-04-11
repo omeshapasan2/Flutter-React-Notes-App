@@ -5,7 +5,7 @@ import { MdContentCopy } from "react-icons/md";
 const Note = ( { id, text, date, handleDeleteNote, handleCopyNote, handleEditNote } ) => {
     return(
         <div className="note" >
-            <div className="cursor-pointer" onClick ={() => handleEditNote(id, text)} >
+            <div className="note-content cursor-pointer" onClick ={() => handleEditNote(id, text)} >
                 <span>{text}</span>
             </div>
 
