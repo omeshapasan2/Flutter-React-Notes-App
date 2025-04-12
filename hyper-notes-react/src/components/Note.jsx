@@ -11,6 +11,9 @@ const Note = ( { id, text, date, handleDeleteNote, handleCopyNote, handleEditNot
 
             <div className="note-footer">
                 <small>{date}</small>
+                {/* <small className="text-gray-500 text-md">
+                        {noteText.length} Characters
+                </small> */}
                 
                 <div className="note-footer-icons flex justify-start space-x-4">
                     <MdContentCopy 
