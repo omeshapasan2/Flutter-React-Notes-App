@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.2",
+    "@tiptap/extension-image": "^2.11.7",
+    "@tiptap/react": "^2.11.7",
+    "@tiptap/starter-kit": "^2.11.7",
     "firebase": "^11.6.0",
     "lucide-react": "^0.487.0",
     "react": "^19.0.0",
