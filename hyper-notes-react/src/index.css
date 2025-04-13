@@ -248,3 +248,65 @@ textarea {
   color: #e23c3c;
 }
  
+
+/* Rich text editor styles */
+.rich-text-editor {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-toolbar {
+  background-color: #f9f9f9;
+  border-radius: 4px 4px 0 0;
+}
+
+.ProseMirror {
+  padding: 12px;
+  min-height: 120px;
+  border-radius: 0 0 4px 4px;
+  overflow-y: auto;
+  outline: none;
+}
+
+.ProseMirror p {
+  margin-bottom: 0.75em;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.5rem;
+  margin-bottom: 0.75em;
+}
+
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+  border-radius: 4px;
+}
+
+/* Note content display styles */
+.note-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 0.5em 0;
+  border-radius: 4px;
+}
+
+.note-content ul,
+.note-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 0.5em;
+}
+
+.note-content p {
+  margin-bottom: 0.5em;
+}
+
+/* Ensure text doesn't overflow */
+.note-content {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
