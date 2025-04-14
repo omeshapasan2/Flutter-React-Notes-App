@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import '../models/note.dart';
 import '../screens/note_editor_screen.dart';
 
@@ -17,13 +18,34 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // For rich text preview
+    QuillController? previewController;
+    
+    if (note.isRichText && note.content != null) {
+      try {
+        final contentDelta = note.content!['delta'] as List<dynamic>;
+
+        previewController = QuillController(
+          document: Document.fromJson(contentDelta),
+          selection: const TextSelection.collapsed(offset: 0),
+        );
+      } catch (e) {
+        // If parsing fails, we'll fall back to plain text
+        previewController = null;
+      }
+    }
+
     return InkWell(
       onTap: () {
-        // Open note editor when tapped (restored from old version)
+        // Navigate to the editor with appropriate data
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NoteEditorScreen(noteId: note.id, initialText: note.text),
+            builder: (context) => NoteEditorScreen(
+              noteId: note.id, 
+              initialText: note.text,
+              initialContent: note.content,
+            ),
           ),
         );
       },
@@ -52,15 +74,26 @@ class NoteCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Text(
-                  note.text,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 6, // Restored from old version
-                ),
+                child: note.isRichText && previewController != null
+                    ? QuillEditor(
+                        controller: previewController,
+                        scrollController: ScrollController(),
+                        // scrollable: true,
+                        focusNode: FocusNode(),
+                        // autoFocus: false,
+                        // readOnly: true,
+                        // expands: false,
+                        // padding: EdgeInsets.zero,
+                      )
+                    : Text(
+                        note.text,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 6,
+                      ),
               ),
               const SizedBox(height: 8),
               Row(
@@ -75,7 +108,7 @@ class NoteCard extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      // Copy button (restored from old version)
+                      // Copy button
                       InkWell(
                         onTap: () {
                           Clipboard.setData(ClipboardData(text: note.text));
@@ -93,7 +126,7 @@ class NoteCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 4),
-                      // Delete button with confirmation dialog (restored from old version)
+                      // Delete button with confirmation dialog
                       InkWell(
                         onTap: () {
                           // Show confirmation dialog before deleting

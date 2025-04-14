@@ -35,6 +35,19 @@ class FirestoreService {
     });
   }
 
+  // Add a new rich note
+  Future<void> addRichNote(String plainText, Map<String, dynamic> contentJson) async {
+    if (_notesRef == null) return;
+    
+    final date = DateTime.now().toLocal().toString().split(' ')[0];
+    await _notesRef!.add({
+      'text': plainText,
+      'date': date,
+      'content': contentJson,
+      'isRichText': true,
+    });
+  }
+
   // Delete a note
   Future<void> deleteNote(String noteId) async {
     if (_notesRef == null) return;
@@ -48,6 +61,18 @@ class FirestoreService {
     await _notesRef!.doc(noteId).update({
       'text': text,
       'date': DateTime.now().toLocal().toString().split(' ')[0], // Update date
+    });
+  }
+
+  // Update a rich note
+  Future<void> updateRichNote(String noteId, String plainText, Map<String, dynamic> contentJson) async {
+    if (_notesRef == null) return;
+    
+    await _notesRef!.doc(noteId).update({
+      'text': plainText,
+      'date': DateTime.now().toLocal().toString().split(' ')[0], // Update date
+      'content': contentJson,
+      'isRichText': true,
     });
   }
 }
